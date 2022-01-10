@@ -1,0 +1,10 @@
+com\company\talend\components\entities\SchemaInfo.class
+com\company\talend\components\output\FileTwiceOutputDelimitedOutputConfiguration.class
+com\company\talend\components\dataset\CustomDataset.class
+com\company\talend\components\output\FileTwiceOutputDelimitedOutput.class
+com\company\talend\components\service\CompanyComponentService.class
+com\company\talend\components\package-info.class
+com\company\talend\components\source\FileEvenInputDelimitedMapper.class
+com\company\talend\components\datastore\CustomDatastore.class
+com\company\talend\components\source\FileEvenInputDelimitedMapperConfiguration.class
+com\company\talend\components\source\FileEvenInputDelimitedSource.class
