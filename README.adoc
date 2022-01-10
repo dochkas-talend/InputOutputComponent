@@ -1,2 +1,9 @@
 = A Component Family
 
+# Input Component:
+
+reads every second line of delimited file
+
+# Output Component:
+
+writes each record in delimited file twice
