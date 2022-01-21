@@ -14,14 +14,13 @@ import org.talend.sdk.component.api.configuration.ui.widget.Structure;
 import org.talend.sdk.component.api.meta.Documentation;
 
 @GridLayout({
-    // the generated layout put one configuration entry per line,
-    // customize it as much as needed
     @GridLayout.Row({ "schema" }),
     @GridLayout.Row({ "isHeaderIncluded" }),
     @GridLayout.Row({ "dataset" })
 })
 @Documentation("TODO fill the documentation for this configuration")
 public class FileTwiceOutputDelimitedOutputConfiguration implements Serializable {
+
     @Option
     @Documentation("TODO fill the documentation for this parameter")
     private CustomDataset dataset;

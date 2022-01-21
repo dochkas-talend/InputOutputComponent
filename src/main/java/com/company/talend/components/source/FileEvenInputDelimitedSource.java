@@ -34,9 +34,6 @@ public class FileEvenInputDelimitedSource implements Serializable {
 
     @PostConstruct
     public void init() throws IOException {
-        // this method will be executed once for the whole component execution,
-        // this is where you can establish a connection for instance
-
         try {
             reader = new BufferedReader(new FileReader(configuration
                                                         .getDataset()
@@ -44,11 +41,9 @@ public class FileEvenInputDelimitedSource implements Serializable {
                                                         .getFilePath()));
 
             int header = configuration.getHeader();
-            int rowCount = 0;
 
-            while (rowCount < header) {
+            for (int i = 0; i < header; i++) {
                 reader.readLine();
-                rowCount++;
             }
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException("File path is incorrect!");
@@ -57,12 +52,6 @@ public class FileEvenInputDelimitedSource implements Serializable {
 
     @Producer
     public Record next() throws IOException {
-        // this is the method allowing you to go through the dataset associated
-        // to the component configuration
-        //
-        // return null means the dataset has no more data to go through
-        // you can use the builderFactory to create a new Record.
-
         reader.readLine();
         String evenLine = reader.readLine();
 
@@ -72,16 +61,17 @@ public class FileEvenInputDelimitedSource implements Serializable {
 
         String[] input = evenLine.split(configuration.getDataset().getDelimiter());
 
-        List<SchemaInfo> schemas = configuration.getSchema();
-
-        if (input.length != schemas.size()) {
-            throw new IllegalStateException("Schema doesn't match input!");
-        }
+        List<SchemaInfo> schema = configuration.getSchema();
 
         Record.Builder newRecord = builderFactory.newRecordBuilder();
 
-        for (int i = 0; i < input.length; i++) {
-            SchemaInfo schemaInfo = schemas.get(i);
+        for (int i = 0; i < schema.size(); i++) {
+            SchemaInfo schemaInfo = schema.get(i);
+
+            if (i >= input.length) {
+                newRecord.withString(schemaInfo.getLabel(), null);
+                continue;
+            }
 
             switch (schemaInfo.getTalendType()) {
                 case "id_Integer":
@@ -100,9 +90,6 @@ public class FileEvenInputDelimitedSource implements Serializable {
 
     @PreDestroy
     public void release() throws IOException {
-        // this is the symmetric method of the init() one,
-        // release potential connections you created or data you cached
-
         reader.close();
     }
 }

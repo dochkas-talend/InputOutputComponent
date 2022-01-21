@@ -19,11 +19,8 @@ import org.talend.sdk.component.api.service.record.RecordBuilderFactory;
 
 import com.company.talend.components.service.CompanyComponentService;
 
-//
-// this class role is to enable the work to be distributed in environments supporting it.
-//
-@Version(1) // default version is 1, if some configuration changes happen between 2 versions you can add a migrationHandler
-@Icon(value = CUSTOM, custom = "FileEvenInputDelimited") // icon is located at src/main/resources/icons/FileEvenInputDelimited.svg
+@Version(1)
+@Icon(value = CUSTOM, custom = "FileEvenInputDelimited")
 @PartitionMapper(name = "FileEvenInputDelimited")
 @Documentation("TODO fill the documentation for this mapper")
 public class FileEvenInputDelimitedMapper implements Serializable {

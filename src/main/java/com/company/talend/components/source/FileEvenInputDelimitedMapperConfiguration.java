@@ -12,8 +12,6 @@ import org.talend.sdk.component.api.configuration.ui.widget.Structure;
 import org.talend.sdk.component.api.meta.Documentation;
 
 @GridLayout({
-    // the generated layout put one configuration entry per line,
-    // customize it as much as needed
     @GridLayout.Row({ "schema" }),
     @GridLayout.Row({ "header" }),
     @GridLayout.Row({ "dataset" })

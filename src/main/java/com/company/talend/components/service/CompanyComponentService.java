@@ -13,20 +13,23 @@ public class CompanyComponentService {
 
     public static final String ACTION_BASIC_HEALTH_CHECK = "ACTION_BASIC_HEALTH_CHECK";
 
-    // you can put logic here you can reuse in components
     @HealthCheck(ACTION_BASIC_HEALTH_CHECK)
     public HealthCheckStatus validateFilePath(@Option CustomDatastore datastore) {
-        File file = new File(datastore.getFilePath());
+        try {
+            File file = new File(datastore.getFilePath());
 
-        if (!file.isFile()) {
-            return new HealthCheckStatus(HealthCheckStatus.Status.KO, "Not a file specified!");
-        }
+            if (!file.isFile()) {
+                return new HealthCheckStatus(HealthCheckStatus.Status.KO, "Not a file specified!");
+            }
 
-        if (file.getParentFile().exists()) {
-            return new HealthCheckStatus(HealthCheckStatus.Status.OK, "Connection successful!");
-        }
-        else {
-            return new HealthCheckStatus(HealthCheckStatus.Status.KO, "Directory doesn't exist");
+            if (file.getParentFile().exists()) {
+                return new HealthCheckStatus(HealthCheckStatus.Status.OK, "Connection successful!");
+            }
+            else {
+                return new HealthCheckStatus(HealthCheckStatus.Status.KO, "Directory doesn't exist");
+            }
+        } catch (Exception e) {
+            return new HealthCheckStatus(HealthCheckStatus.Status.KO, e.getMessage());
         }
     }
 }
